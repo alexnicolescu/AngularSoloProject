@@ -16,17 +16,19 @@
     </p>
     <mat-card-content>
       <mat-form-field>
-        <input placeholder="Username">
+        <input placeholder="Username"
+                [(ngModel)]="user.username">
       </mat-form-field>
       <mat-form-field>
-        <input placeholder="Password">
+        <input placeholder="Password"
+               [(ngModel)]="user.password">
       </mat-form-field>
     </mat-card-content>
     <mat-card-actions class="example-button-row">
       <button class="login-button" mat-button>
         Lost password
       </button>
-      <button mat-raised-button color="primary">
+      <button (click)="tryLogin()" mat-raised-button color="primary">
         Sign in
       </button>
     </mat-card-actions>

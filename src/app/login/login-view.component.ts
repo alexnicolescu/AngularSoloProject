@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'cp-login-view',
@@ -7,8 +7,19 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class LoginViewComponent implements OnInit {
   @Input()
+  user: any;
+  @Input()
   signInError: string;
-  constructor() { }
+  @Output('login')
+  tryLoginEmitter = new EventEmitter();
+
+  tryLogin() {
+    this.tryLoginEmitter.emit(this.user);
+  }
+
+  constructor() {
+    this.user = {};
+  }
 
   ngOnInit(): void {
   }
