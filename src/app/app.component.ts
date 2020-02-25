@@ -8,6 +8,7 @@ import {Course} from './course';
 })
 export class AppComponent {
   courses: Course[];
+  toolbarTitle = 'Courseplanner2';
 
   constructor() {
     this.courses = [
