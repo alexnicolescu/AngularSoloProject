@@ -11,10 +11,19 @@ import {MatIconModule} from '@angular/material/icon';
 import { TopToolbarComponent } from './top-toolbar/top-toolbar.component';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+const appRoutes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: '', component: HomeComponent}
+];
 @NgModule({
   declarations: [
     AppComponent,
-    TopToolbarComponent
+    TopToolbarComponent,
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +34,11 @@ import {FormsModule} from '@angular/forms';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(
+      appRoutes,
+      { enableTracing: true } // <-- debugging purposes only
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]
