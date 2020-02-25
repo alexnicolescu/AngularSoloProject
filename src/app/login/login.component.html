@@ -8,6 +8,12 @@
     <i class="material-icons">
       lock
     </i> Login
+    <p *ngIf="signInError && signInError.length>0" class="lost_password_button">
+      <i class="material-icons">
+        pan_tool
+      </i>
+      {{signInError}}
+    </p>
     <mat-card-content>
       <mat-form-field>
         <input placeholder="Username">
