@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '../users/user';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'cp-login',
@@ -7,8 +8,9 @@ import {User} from '../users/user';
 })
 export class LoginComponent implements OnInit {
   users: User[];
+  loginError = null;
 
-  constructor() {
+  constructor(private router: Router) {
     this.users = [
       {username: 'lbilde', password: '123', email: 'cheese@namnam.dk'},
       {username: 'lbilde22', password: '123', email: 'cheese22@namnam22.dk'},
@@ -22,9 +24,10 @@ export class LoginComponent implements OnInit {
       .filter(x => x.username === user.username)
       .filter(y => y.password === user.password);
     if (userAccepted && userAccepted.length === 1) {
-      console.log('login success');
+      this.loginError = null;
+      this.router.navigate(['/']).then(() => console.log('page changed'));
     } else {
-      console.log('not correct username and password');
+      this.loginError = 'username or password were wrong ';
     }
   }
 
