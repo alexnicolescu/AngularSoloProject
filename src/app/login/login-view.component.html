@@ -14,23 +14,28 @@
       </i>
       {{signInError}}
     </p>
-    <mat-card-content>
-      <mat-form-field>
-        <input placeholder="Username"
-                [(ngModel)]="user.username">
-      </mat-form-field>
-      <mat-form-field>
-        <input placeholder="Password"
-               [(ngModel)]="user.password">
-      </mat-form-field>
-    </mat-card-content>
-    <mat-card-actions class="example-button-row">
-      <button class="login-button" mat-button>
-        Lost password
-      </button>
-      <button (click)="tryLogin()" mat-raised-button color="primary">
-        Sign in
-      </button>
-    </mat-card-actions>
+    <form (ngSubmit)="tryLogin()">
+      <mat-card-content>
+        <mat-form-field>
+          <input matInput placeholder="Username"
+                 name="userName"
+                 [(ngModel)]="user.username">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Password"
+                 name="password"
+                 type="password"
+                 [(ngModel)]="user.password">
+        </mat-form-field>
+      </mat-card-content>
+      <mat-card-actions class="example-button-row">
+        <button class="login-button" mat-button>
+          Lost password
+        </button>
+        <button (click)="tryLogin()" mat-raised-button color="primary">
+          Sign in
+        </button>
+      </mat-card-actions>
+    </form>
   </mat-card>
 </div>
