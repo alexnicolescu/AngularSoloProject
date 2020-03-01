@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {User} from '../users/user';
+import {Observable} from 'rxjs';
+import {of} from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,14 +15,17 @@ export class AuthService {
 
     ];
   }
-  login(username, password): Promise<User> {
+  login(username, password): Observable<User> {
     const userAccepted = this.users
       .filter(x => x.username === username)
       .filter(y => y.password === password);
     if (userAccepted && userAccepted.length === 1) {
-        return Promise.resolve(userAccepted[0]);
+         return of(userAccepted[0]);
+      // return new Promise(resolve => {
+      //   setTimeout(() => resolve(userAccepted[0]), 4000);
+      // });
     } else {
-    return null;
+    return of(null);
     }
   }
 }

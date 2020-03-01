@@ -13,10 +13,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './auth/login/login.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { LoginViewComponent } from './login/login-view.component';
+import { LoginViewComponent } from './auth/login/login-view.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {AuthService} from './auth/auth.service';
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', component: HomeComponent}
@@ -46,7 +47,7 @@ const appRoutes: Routes = [
     FlexLayoutModule,
     MatSnackBarModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
