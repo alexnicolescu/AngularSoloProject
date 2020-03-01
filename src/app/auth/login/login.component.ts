@@ -19,13 +19,16 @@ export class LoginComponent implements OnInit {
   }
 
   login(user) {
-    const loggedInUser = this.authService.login(user.username, user.password);
-    if (loggedInUser) {
-      this.loginError = null;
-      this.router.navigate(['/']).then(() => this.loginValidationBar.open('You are logged in', 'Ok', {duration: 3000}));
-    } else {
-      this.loginError = 'username or password were wrong ';
-    }
+    this.authService
+      .login(user.username, user.password)
+      .then(lUser => {
+        if (lUser) {
+          this.loginError = null;
+          this.router.navigate(['/']).then(() => this.loginValidationBar.open('You are logged in', 'Ok', {duration: 3000}));
+        } else {
+          this.loginError = 'username or password were wrong ';
+        }
+      });
   }
 
   ngOnInit(): void {
