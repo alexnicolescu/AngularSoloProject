@@ -5,6 +5,7 @@
 </button>
 <div fxFlexFill fxLayout="row" fxLayoutAlign="center center">
   <mat-card style="margin: 0;width: 200px;">
+    <div *ngIf="!tryingToLogIn">
     <i class="material-icons">
       lock
     </i> Login
@@ -37,5 +38,13 @@
         </button>
       </mat-card-actions>
     </form>
+    </div>
+    <div *ngIf="tryingToLogIn" fxFlexFill [fxLayout]="'column'" fxLayoutAlign="center center">
+      <h3><i class="material-icons">
+        check_circle
+      </i> We are login in, thanks for your patience</h3>
+      <h3><mat-spinner></mat-spinner></h3>
+
+    </div>
   </mat-card>
 </div>

@@ -12,7 +12,8 @@ export class LoginViewComponent implements OnInit {
   signInError: string;
   @Output('login')
   tryLoginEmitter = new EventEmitter();
-
+  @Input()
+  tryingToLogIn: boolean;
   tryLogin() {
     this.tryLoginEmitter.emit(this.user);
   }

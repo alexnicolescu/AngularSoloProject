@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   loginError = null;
   request: Subscription;
-
+  tryingToLogIn: boolean;
   constructor(public loginValidationBar: MatSnackBar,
               private router: Router,
               private authService: AuthService) {
@@ -22,7 +22,8 @@ export class LoginComponent implements OnInit {
   }
 
   login(user) {
-    if(this.request){
+    this.tryingToLogIn = true;
+    if (this.request) {
       this.request.unsubscribe();
     }
     this.request = this.authService
@@ -35,6 +36,7 @@ export class LoginComponent implements OnInit {
         } else {
           this.loginError = 'username or password were wrong ';
         }
+        this.tryingToLogIn = false;
       });
   }
 

@@ -18,6 +18,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginViewComponent } from './auth/login/login-view.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {AuthService} from './auth/auth.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', component: HomeComponent}
@@ -30,23 +31,24 @@ const appRoutes: Routes = [
     LoginComponent,
     LoginViewComponent
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    FontAwesomeModule,
-    MatInputModule,
-    MatCardModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    FormsModule,
-    RouterModule.forRoot(
-      appRoutes,
-      { enableTracing: true } // <-- debugging purposes only
-    ),
-    FlexLayoutModule,
-    MatSnackBarModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        FontAwesomeModule,
+        MatInputModule,
+        MatCardModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatButtonModule,
+        FormsModule,
+        RouterModule.forRoot(
+            appRoutes,
+            {enableTracing: true} // <-- debugging purposes only
+        ),
+        FlexLayoutModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule
+    ],
   providers: [AuthService],
   bootstrap: [AppComponent]
 })
