@@ -1,11 +1,25 @@
 <mat-toolbar color="primary">
   <button mat-flat-button routerLink="/" color="primary"><i class="material-icons">
     thumb_up
-  </i> {{title}}</button>
+  </i>{{title}}</button>
 
   <span class="example-fill-remaining-space"></span>
-    <button mat-flat-button routerLink="/login" color="primary" ><i class="material-icons">
+    <button *ngIf="!user" mat-flat-button routerLink="/login" color="primary" ><i class="material-icons">
       call_made
     </i>Sign in </button>
+  <button *ngIf="user" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item disabled>
+      <mat-icon>voicemail</mat-icon>
+      <span *ngIf="user">{{user.username}}</span>
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>notifications_off</mat-icon>
+      <span>Sign Out</span>
+    </button>
+  </mat-menu>
+
 
 </mat-toolbar>
