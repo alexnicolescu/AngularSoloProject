@@ -2,35 +2,26 @@ import {Injectable} from '@angular/core';
 import {User} from '../users/user';
 import {Observable} from 'rxjs';
 import {of} from 'rxjs';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {AngularFireAuth} from '@angular/fire/auth';
+import {FirebaseAuth} from '@angular/fire';
+import { from } from 'rxjs';
+import UserCredential = firebase.auth.UserCredential;
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  users: User[];
 
-  constructor() {
-    this.users = [
-      {username: 'lbilde', password: '123', email: 'cheese@namnam.dk'},
-      {username: 'lbilde22', password: '123', email: 'cheese22@namnam22.dk'},
-      {username: 'ilikechokolate', password: '123', email: 'cheese33@namnam33.dk'},
-
-    ];
+  constructor(private af: AngularFireAuth) {
   }
 
-  login(username, password): Observable<User> {
-    const userAccepted = this.users
-      .filter(x => x.username === username)
-      .filter(y => y.password === password);
-    if (userAccepted && userAccepted.length === 1) {
-      localStorage.setItem('currentUser', JSON.stringify({token: 'jwt will come later', username: userAccepted[0].username}));
-      return of(userAccepted[0]);
-      // return new Promise(resolve => {
-      //   setTimeout(() => resolve(userAccepted[0]), 4000);
-      // });
-    } else {
-      return of(null);
-    }
+  login(email, password): Observable<UserCredential> {
+  const promise = this.af.auth.signInWithEmailAndPassword(
+    email,
+    password
+  );
+  return from(promise);
   }
 
   currentUser() {

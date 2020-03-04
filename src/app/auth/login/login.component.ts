@@ -5,6 +5,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {AuthService} from '../auth.service';
 import {delay} from 'rxjs/operators';
 import {Subscription} from 'rxjs';
+import {AuthUser} from './authUser';
 
 @Component({
   selector: 'cp-login',
@@ -22,13 +23,13 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService.logOut();
   }
 
-  login(user) {
+  login(user: AuthUser) {
     this.tryingToLogIn = true;
     if (this.request) {
       this.request.unsubscribe();
     }
     this.request = this.authService
-      .login(user.username, user.password)
+      .login(user.email, user.password)
       .pipe(delay(5000))
       .subscribe(lUser => {
           if (lUser) {

@@ -22,6 +22,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatMenuModule} from '@angular/material/menu';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFirestore} from '@angular/fire/firestore';
+import {AngularFireAuth} from '@angular/fire/auth';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyDPJLVh95pbFV-lW1BmkMHyXC9Zcm5VC5A',
@@ -66,7 +67,9 @@ const appRoutes: Routes = [
     MatMenuModule,
     AngularFireModule.initializeApp(firebaseConfig),
   ],
-  providers: [AuthService, AngularFirestore],
+  providers: [AuthService,
+    AngularFirestore,
+    AngularFireAuth],
   bootstrap: [AppComponent]
 })
 export class AppModule {
