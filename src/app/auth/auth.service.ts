@@ -5,8 +5,12 @@ import {of} from 'rxjs';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {FirebaseAuth} from '@angular/fire';
-import { from } from 'rxjs';
+import {from} from 'rxjs';
 import UserCredential = firebase.auth.UserCredential;
+import Auth = firebase.auth.Auth;
+import * as firebase from 'firebase';
+import {first, tap} from 'rxjs/operators';
+import {AuthUser} from './login/authUser';
 
 @Injectable({
   providedIn: 'root'
@@ -17,18 +21,19 @@ export class AuthService {
   }
 
   login(email, password): Observable<UserCredential> {
-  const promise = this.af.auth.signInWithEmailAndPassword(
-    email,
-    password
-  );
-  return from(promise);
+    const promise = this.af.auth.signInWithEmailAndPassword(
+      email,
+      password
+    );
+    return from(promise);
   }
 
   currentUser() {
-    return JSON.parse(localStorage.getItem('currentUser'));
+    return firebase.auth().currentUser;
   }
 
-  logOut() {
-    return localStorage.removeItem('currentUser');
+  logOut(): Observable<void> {
+    const promise = firebase.auth().signOut();
+    return from(promise);
   }
 }
