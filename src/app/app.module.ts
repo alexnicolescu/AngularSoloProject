@@ -24,6 +24,7 @@ import {AngularFireModule} from '@angular/fire';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {UserService} from './users/user.service';
+import {AuthGuard} from './auth/auth-guard';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyDPJLVh95pbFV-lW1BmkMHyXC9Zcm5VC5A',
@@ -37,7 +38,7 @@ export const firebaseConfig = {
 };
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: '', component: HomeComponent}
+  {path: '', component: HomeComponent , canActivate: [AuthGuard]}
 ];
 
 @NgModule({
@@ -71,7 +72,8 @@ const appRoutes: Routes = [
   providers: [AuthService,
     AngularFirestore,
     AngularFireAuth,
-    UserService],
+    UserService,
+    AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

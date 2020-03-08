@@ -16,7 +16,7 @@ import {AuthUser} from './login/authUser';
   providedIn: 'root'
 })
 export class AuthService {
-
+  isLoggedIn = false;
   constructor(private af: AngularFireAuth) {
   }
 
@@ -25,15 +25,21 @@ export class AuthService {
       email,
       password
     );
+    this.isLoggedIn = true;
     return from(promise);
   }
 
   currentUser() {
-    return firebase.auth().currentUser;
+    const user = firebase.auth().currentUser;
+    if (user) {
+      this.isLoggedIn = true;
+      return user;
+    }
   }
 
   logOut(): Observable<void> {
     const promise = firebase.auth().signOut();
+    this.isLoggedIn = false;
     return from(promise);
   }
 }
