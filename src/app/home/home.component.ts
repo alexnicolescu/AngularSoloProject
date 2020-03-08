@@ -5,6 +5,7 @@ import {User} from '../users/user';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {AngularFireStorageModule} from '@angular/fire/storage';
+import {UserService} from '../users/user.service';
 
 @Component({
   selector: 'cp-home',
@@ -15,11 +16,10 @@ export class HomeComponent implements OnInit {
   toolbarTitle = 'CP2';
   users: Observable<User[]>;
   private usersCollection: AngularFirestoreCollection<User>;
-  constructor(private af: AngularFirestore) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.usersCollection = this.af.collection<User>('users');
-    this.users = this.usersCollection.valueChanges();
+    this.users = this.userService.getUsers();
   }
 
 }

@@ -23,6 +23,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
+import {UserService} from './users/user.service';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyDPJLVh95pbFV-lW1BmkMHyXC9Zcm5VC5A',
@@ -69,7 +70,8 @@ const appRoutes: Routes = [
   ],
   providers: [AuthService,
     AngularFirestore,
-    AngularFireAuth],
+    AngularFireAuth,
+    UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
