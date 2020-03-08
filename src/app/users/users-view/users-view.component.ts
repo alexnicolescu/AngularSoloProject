@@ -9,10 +9,14 @@ import {UserService} from '../user.service';
 })
 export class UsersViewComponent implements OnInit {
   users: Observable<User[]>;
+  creatingUser: boolean;
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.users = this.userService.getUsers();
+  }
+  creatingUserEvent(value) {
+    this.creatingUser = value;
   }
 
 }
