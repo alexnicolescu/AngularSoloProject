@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {User} from '../user';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
+import EqualTextValidator from '../equal.validator';
 
 @Component({
   selector: 'cp-user-create',
@@ -29,14 +30,23 @@ export class UserCreateComponent implements OnInit {
     this.creatingUserEvent.emit(value);
   }
 
-  onSubmit() {
-    this.createUserEvent.emit(this.user);
-    this.creatingUser = false;
-    this.clear();
+  onSubmit(userForm) {
+    if (userForm.form.valid) {
+      this.createUserEvent.emit(this.user);
+      this.creatingUser = false;
+      this.clear();
+    }
   }
 
   clear() {
     this.user = new User();
+  }
+
+  verifyPassword(pass: string,
+                 repeatPass: string) {
+    console.log('Password ', pass);
+    console.log('RPassword ', repeatPass);
+    return pass === repeatPass;
   }
 
 }
