@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
-import {User} from '../user';
 import {UserService} from '../user.service';
+import {User} from '../user';
+
 
 @Component({
   selector: 'cp-users-view',
@@ -17,6 +18,10 @@ export class UsersViewComponent implements OnInit {
   }
   creatingUserEvent(value) {
     this.creatingUser = value;
+  }
+  createUser(user) {
+    this.userService.createUser(user);
+    this.creatingUser = false;
   }
 
 }

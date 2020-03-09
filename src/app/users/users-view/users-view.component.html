@@ -1,4 +1,7 @@
 <cp-top-toolbar [title]="'CP2-Users'"></cp-top-toolbar>
 <hr>
-<cp-user-create (creatingUserEvent)="creatingUserEvent($event)"></cp-user-create>
+<cp-user-create
+  (createUserEvent)="createUser($event)"
+  (creatingUserEvent)="creatingUserEvent($event)"
+></cp-user-create>
 <cp-users-list *ngIf="!creatingUser" [users]="users"></cp-users-list>

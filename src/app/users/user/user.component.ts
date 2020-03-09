@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {User} from '../user';
+
 
 @Component({
   selector: 'cp-user',
@@ -9,8 +10,21 @@ import {User} from '../user';
 export class UserComponent implements OnInit {
   @Input()
   user: User;
-  constructor() { }
-    ngOnInit(): void {
+  @Output()
+  deleteUserEvent = new EventEmitter<string>();
+  validateDelete: boolean;
+  constructor() {
+  }
+
+  ngOnInit(): void {
+  }
+
+  deleteValidation(value: boolean) {
+    this.validateDelete = value;
+  }
+  delete() {
+    this.deleteUserEvent.emit(this.user.$key);
+    this.validateDelete = false;
   }
 
 }
