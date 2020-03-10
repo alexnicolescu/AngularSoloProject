@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {User} from '../users/user';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
 import {AuthService} from '../auth/auth.service';
@@ -7,6 +6,7 @@ import {FirebaseAuth} from '@angular/fire';
 import {AuthUser} from '../auth/login/authUser';
 import UserCredential = firebase.auth.UserCredential;
 import * as firebase from 'firebase';
+import {User} from 'firebase';
 
 @Component({
   selector: 'cp-top-toolbar',
@@ -16,7 +16,7 @@ import * as firebase from 'firebase';
 export class TopToolbarComponent implements OnInit {
   @Input()
   title: string;
-  user: any;
+  user: User;
 
   constructor(public loginValidationBar: MatSnackBar,
               private router: Router,
@@ -24,8 +24,10 @@ export class TopToolbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.user = this.authService.currentUser();
-    // console.log(this.user);
+    this.authService.currentUser().subscribe(user => {
+      this.user = user;
+    });
+    console.log(this.user);
   }
 
   logout() {

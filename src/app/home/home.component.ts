@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {AngularFireModule} from '@angular/fire';
 import {Observable} from 'rxjs';
-import {User} from '../users/user';
 import {AngularFirestore, AngularFirestoreCollection} from '@angular/fire/firestore';
 import {AngularFireDatabase} from '@angular/fire/database';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {UserService} from '../users/user.service';
+import {User} from '../users/user';
 
 @Component({
   selector: 'cp-home',

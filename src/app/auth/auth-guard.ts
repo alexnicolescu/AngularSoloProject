@@ -12,11 +12,14 @@ export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {
   }
 
-  canActivate(): boolean {
-    if (this.authService.isLoggedIn !== true) {
-      console.log('Access Denied');
-      this.router.navigate(['/login']);
-    }
+  canActivate() {
+    this.authService
+      .isAuthenticated()
+      .subscribe(authenticated => {
+        if (!authenticated) {
+          this.router.navigate(['/login']);
+        }
+      });
     return true;
   }
 

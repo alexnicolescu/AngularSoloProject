@@ -5,8 +5,8 @@
     </i>
     </div>
     <div fxFlex>
-      <h3>{{user?.username}}</h3>
-      <h4>{{user?.email}}</h4>
+      <h3>{{user?.profile.username}}</h3>
+      <h4>{{user?.profile.email}}</h4>
     </div>
     <div *ngIf="!validateDelete" fxFlex="3em" [fxFlexAlign]="'end'" [fxLayout]="'column'">
       <button color="'warn'" mat-icon-button (click)="deleteValidation(true)">

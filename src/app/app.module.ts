@@ -25,6 +25,12 @@ import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {UserService} from './users/user.service';
 import {AuthGuard} from './auth/auth-guard';
+import { UsersViewComponent } from './users/users-view/users-view.component';
+import { UsersListComponent } from './users/users-view/users-list.component';
+import { UserCreateComponent } from './users/user-create/user-create.component';
+import { UserComponent } from './users/user/user.component';
+import {AngularFireDatabase} from '@angular/fire/database';
+import EqualTextValidator from './users/equal.validator';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyDPJLVh95pbFV-lW1BmkMHyXC9Zcm5VC5A',
@@ -36,10 +42,13 @@ export const firebaseConfig = {
   appId: '1:1040120994322:web:72cff1fa4a33e2698216cb',
   measurementId: 'G-VQMCSELPCJ'
 };
+
+
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: '', component: HomeComponent , canActivate: [AuthGuard]}
-];
+  {path: '', component: HomeComponent},
+  {path: 'users', component: UsersViewComponent, canActivate: [AuthGuard]}
+  ];
 
 @NgModule({
   declarations: [
@@ -47,7 +56,12 @@ const appRoutes: Routes = [
     TopToolbarComponent,
     HomeComponent,
     LoginComponent,
-    LoginViewComponent
+    LoginViewComponent,
+    UsersViewComponent,
+    UsersListComponent,
+    UserCreateComponent,
+    UserComponent,
+    EqualTextValidator
   ],
   imports: [
     BrowserModule,
@@ -73,7 +87,8 @@ const appRoutes: Routes = [
     AngularFirestore,
     AngularFireAuth,
     UserService,
-    AuthGuard],
+    AuthGuard,
+    AngularFireDatabase],
   bootstrap: [AppComponent]
 })
 export class AppModule {

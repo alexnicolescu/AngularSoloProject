@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {User} from '../user';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
@@ -10,16 +10,20 @@ import EqualTextValidator from '../equal.validator';
   styleUrls: ['./user-create.component.css']
 })
 export class UserCreateComponent implements OnInit {
-
+  @Input()
+  creatingUser: boolean;
+  @Input()
+  user: User;
+  @Input()
+  error: string;
   @Output()
   creatingUserEvent = new EventEmitter<boolean>();
-  creatingUser: boolean;
+
   @Output()
   createUserEvent = new EventEmitter<User>();
-  user: User;
+
 
   constructor() {
-    this.user = new User();
   }
 
   ngOnInit(): void {
@@ -33,14 +37,9 @@ export class UserCreateComponent implements OnInit {
   onSubmit(userForm) {
     if (userForm.form.valid) {
       this.createUserEvent.emit(this.user);
-      this.creatingUser = false;
-      this.clear();
     }
   }
 
-  clear() {
-    this.user = new User();
-  }
 
   verifyPassword(pass: string,
                  repeatPass: string) {
