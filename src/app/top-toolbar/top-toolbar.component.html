@@ -13,7 +13,15 @@
   <mat-menu #menu="matMenu">
     <button mat-menu-item disabled>
       <mat-icon>voicemail</mat-icon>
-      <span *ngIf="user">{{user.email}}</span>
+      <span *ngIf="user">{{user?.email}}</span>
+    </button>
+    <button mat-menu-item routerLink="/profile" >
+      <mat-icon>credit_card</mat-icon>
+      <span >Profile</span>
+    </button>
+    <button mat-menu-item routerLink="/users" >
+      <mat-icon>verified_user</mat-icon>
+      <span >Users</span>
     </button>
     <button mat-menu-item (click)="logout()">
       <mat-icon>notifications_off</mat-icon>

@@ -63,6 +63,12 @@
           Email invalid
         </mat-hint>
       </mat-form-field>
+        <mat-select placeholder="Role" [(ngModel)]="user.role" name="role">
+          <mat-option *ngFor="let role of roles" [value]="role" >
+            {{role.name}}
+          </mat-option>
+        </mat-select>
+      Smt:{{user.role.$key}}
       <mat-form-field>
         <input name="passsword"
                #password="ngModel"

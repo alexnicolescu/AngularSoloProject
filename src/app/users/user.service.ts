@@ -30,31 +30,23 @@ export class UserService {
     }
   }
 
-  // createUser(user: User) {
-  //   firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-  //     .then(res => {
-  //       this.ad.list('users').push({
-  //           email: user.email,
-  //           username: user.username,
-  //           uid: res.user.uid,
-  //         }
-  //       );
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     });
-  //   // this.ad.list<User>('users').push({
-  //   // });
-  //   // })
-  // }
+  getUser($key: string): Observable<User> {
+    return this.ad.object<User>('users/' + $key).valueChanges();
+  }
 
   createUser(user: User): ReplaySubject<any> {
     const resultSubject = new ReplaySubject(1);
     firebase.auth().createUserWithEmailAndPassword(user.profile.email, user.password)
       .then(res => {
         this.ad.object(`users/${res.user.uid}`).set({
-            email: user.profile.email,
-            username: user.profile.username,
+            profile: {
+              email: user.profile.email || null,
+              username: user.profile.username || null
+            },
+            role: {
+              id: user.role.$key || null,
+              name: user.role.name || null
+            }
           }
         )
           .then(useri => {
@@ -68,5 +60,23 @@ export class UserService {
         resultSubject.error(error);
       });
     return resultSubject;
+  }
+
+  updateUserProfile(user: User) {
+    const resultSubject = new ReplaySubject(1);
+    if (user !== undefined && user.$key !== undefined) {
+      const dataToUpdate = {};
+      dataToUpdate[`users/${user.$key}/profile/username`] = user.profile.username;
+      dataToUpdate[`users/${user.$key}/profile/displayName`] = user.profile.displayName;
+      this.ad.object('')
+        .update(dataToUpdate)
+        .then(() => {
+          resultSubject.next(user);
+        })
+        .catch(err => {
+          resultSubject.error(err);
+        });
+      return resultSubject;
+    }
   }
 }

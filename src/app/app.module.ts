@@ -31,6 +31,9 @@ import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserComponent } from './users/user/user.component';
 import {AngularFireDatabase} from '@angular/fire/database';
 import EqualTextValidator from './users/equal.validator';
+import {RoleService} from './roles/role.service';
+import {MatSelectModule} from '@angular/material/select';
+import { UserProfileComponent } from './users/user-profile/user-profile.component';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyDPJLVh95pbFV-lW1BmkMHyXC9Zcm5VC5A',
@@ -47,7 +50,11 @@ export const firebaseConfig = {
 const appRoutes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: '', component: HomeComponent},
-  {path: 'users', component: UsersViewComponent, canActivate: [AuthGuard]}
+  {path: 'users'
+    , component: UsersViewComponent
+    , canActivate: [AuthGuard]
+    , data: {roles: ['educator', 'admin']} },
+  {path: 'profile', component: UserProfileComponent},
   ];
 
 @NgModule({
@@ -61,7 +68,8 @@ const appRoutes: Routes = [
     UsersListComponent,
     UserCreateComponent,
     UserComponent,
-    EqualTextValidator
+    EqualTextValidator,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -82,13 +90,15 @@ const appRoutes: Routes = [
     MatProgressSpinnerModule,
     MatMenuModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    MatSelectModule,
   ],
   providers: [AuthService,
     AngularFirestore,
     AngularFireAuth,
     UserService,
     AuthGuard,
-    AngularFireDatabase],
+    AngularFireDatabase,
+    RoleService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
