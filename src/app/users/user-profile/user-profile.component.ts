@@ -4,6 +4,7 @@ import {Profile} from '../profile';
 import {AuthService} from '../../auth/auth.service';
 import {User} from '../user';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {AngularFireStorage, AngularFireStorageModule, AngularFireStorageReference} from '@angular/fire/storage';
 
 
 @Component({
@@ -13,9 +14,12 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class UserProfileComponent implements OnInit {
 
+  changingImage: boolean;
   user: User;
   error: string;
-  constructor(private userService: UserService, private authService: AuthService, public updateValidationBar: MatSnackBar) {
+  ref: AngularFireStorageReference;
+
+  constructor(private userService: UserService, private authService: AuthService, public updateValidationBar: MatSnackBar, private afStorage: AngularFireStorage) {
   }
 
   ngOnInit(): void {
@@ -39,5 +43,20 @@ export class UserProfileComponent implements OnInit {
         });
     }
 
+  }
+  changingImageClick() {
+  this.changingImage = true;
+  }
+  saveNewImage() {
+    this.changingImage = false;
+  }
+  upload(event) {
+    // create a random id
+    const randomId = Math.random().toString(36).substring(2);
+    // create a reference to the storage bucket location
+    this.ref = this.afStorage.ref(randomId);
+    // the put method creates an AngularFireUploadTask
+    // and kicks off the upload
+    // this.task = this.ref.put(event.target.files[0]);
   }
 }

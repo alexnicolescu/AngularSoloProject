@@ -4,10 +4,37 @@
       fxFlexFill [fxLayout]="'row'"
       fxLayoutAlign="center start">
   <mat-card>
-    <mat-card-content [fxLayout]="'column'" fxFlex="400px">
+    <mat-card-content [fxLayout]="'column'" fxFlex="600px">
+      <div *ngIf="changingImage" [fxLayout]="'column'">
+        <input type="file" (change)="upload($event)" accept=".png,.jpg" />
+        <button
+          fxLayoutAlign="center center"
+          mat-button
+          type="button"
+          (click)="saveNewImage()">
+          Save
+        </button>
+      </div>
+      <div *ngIf="!changingImage" [fxLayout]="'column'">
       <h3><i class="material-icons">
         credit_card
       </i>Update User profile</h3>
+      <div fxFlex="100" [fxLayout]="'row'">
+        <div [fxLayout]="'column'">
+          <img fxFlex="128px"
+               src="http://placehold.it/128x128"
+               class="profile-img"
+               fxLayoutAlign="center center">
+          <button
+            fxLayoutAlign="center center"
+            mat-button
+            type="button"
+            (click)="changingImageClick()"
+          >
+            Change Image
+          </button>
+        </div>
+        <div fxFlex="100" [fxLayout]="'column'">
       <p
         *ngIf="error"
         [ngStyle]="{'color':'red','font-size':'75%'}"
@@ -15,6 +42,8 @@
         {{error}}
       </p>
       <hr>
+
+
       <mat-form-field>
         <input matInput
                required
@@ -60,6 +89,9 @@
           </i>
         </button>
       </mat-card-actions>
+        </div>
+      </div>
+      </div>
     </mat-card-content>
   </mat-card>
 </form>
