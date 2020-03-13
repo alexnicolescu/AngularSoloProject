@@ -6,9 +6,8 @@
     </div>
     <div fxFlex>
 <!--      <h1>{{user?.profile.displayName}}</h1>-->
-      <h3>{{user?.profile.username}}</h3>
-      <h4>{{user?.profile.email}}</h4>
-      <p>{{user?.role.name}}</p>
+      <h3>{{user?.username}}</h3>
+      <h4>{{user?.email}}</h4>
     </div>
     <div *ngIf="!validateDelete" fxFlex="3em" [fxFlexAlign]="'end'" [fxLayout]="'column'">
       <button color="'warn'" mat-icon-button (click)="deleteValidation(true)">

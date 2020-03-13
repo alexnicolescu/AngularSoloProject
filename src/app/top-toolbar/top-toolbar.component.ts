@@ -8,7 +8,7 @@ import UserCredential = firebase.auth.UserCredential;
 import * as firebase from 'firebase';
 
 import {Subscription} from 'rxjs';
-import {User} from 'firebase';
+import {User} from '../users/user';
 
 @Component({
   selector: 'cp-top-toolbar',
@@ -30,8 +30,9 @@ export class TopToolbarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.currentUserSub = this.authService.currentUser().subscribe(user => {
       this.user = user;
+      // console.log(this.user);
+      return;
     });
-    console.log(this.user);
   }
 
   logout() {

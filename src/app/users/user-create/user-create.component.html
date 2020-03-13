@@ -21,7 +21,7 @@
                required
                class="example-full-width"
                placeholder="Username"
-               [(ngModel)]="user.profile.username"
+               [(ngModel)]="user.username"
                name="username"
                #username="ngModel"
                fxFlex="100"
@@ -46,7 +46,7 @@
                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
                class="example-full-width"
                placeholder="Email"
-               [(ngModel)]="user.profile.email"
+               [(ngModel)]="user.email"
                name="email"
                #email="ngModel"
                id="email">
@@ -63,12 +63,6 @@
           Email invalid
         </mat-hint>
       </mat-form-field>
-        <mat-select placeholder="Role" [(ngModel)]="user.role" name="role">
-          <mat-option *ngFor="let role of roles" [value]="role" >
-            {{role.name}}
-          </mat-option>
-        </mat-select>
-      Smt:{{user.role.$key}}
       <mat-form-field>
         <input name="passsword"
                #password="ngModel"

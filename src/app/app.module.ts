@@ -31,7 +31,6 @@ import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserComponent } from './users/user/user.component';
 import {AngularFireDatabase} from '@angular/fire/database';
 import EqualTextValidator from './users/equal.validator';
-import {RoleService} from './roles/role.service';
 import {MatSelectModule} from '@angular/material/select';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
 
@@ -97,8 +96,7 @@ const appRoutes: Routes = [
     AngularFireAuth,
     UserService,
     AuthGuard,
-    AngularFireDatabase,
-    RoleService],
+    AngularFireDatabase],
   bootstrap: [AppComponent]
 })
 export class AppModule {

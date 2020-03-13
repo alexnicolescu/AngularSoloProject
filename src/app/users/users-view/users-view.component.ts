@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {UserService} from '../user.service';
 import {User} from '../user';
-import {Profile} from '../profile';
-import {Role} from '../../roles/role';
 
 
 @Component({
@@ -19,8 +17,6 @@ export class UsersViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = new User();
-    this.user.profile = new Profile();
-    this.user.role = new Role();
     this.users = this.userService.getUsers();
   }
   creatingUserEvent(value) {

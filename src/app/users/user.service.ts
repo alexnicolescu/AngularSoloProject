@@ -36,19 +36,12 @@ export class UserService {
 
   createUser(user: User): ReplaySubject<any> {
     const resultSubject = new ReplaySubject(1);
-    firebase.auth().createUserWithEmailAndPassword(user.profile.email, user.password)
+    firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
       .then(res => {
         this.ad.object(`users/${res.user.uid}`).set({
-            profile: {
-              email: user.profile.email || null,
-              username: user.profile.username || null
-            },
-            role: {
-              id: user.role.$key || null,
-              name: user.role.name || null
-            }
-          }
-        )
+          email: user.email || null,
+          username: user.username || null,
+        })
           .then(useri => {
             resultSubject.next(useri);
           })
@@ -66,8 +59,8 @@ export class UserService {
     const resultSubject = new ReplaySubject(1);
     if (user !== undefined && user.$key !== undefined) {
       const dataToUpdate = {};
-      dataToUpdate[`users/${user.$key}/profile/username`] = user.profile.username;
-      dataToUpdate[`users/${user.$key}/profile/displayName`] = user.profile.displayName;
+      dataToUpdate[`users/${user.$key}/username`] = user.username;
+      dataToUpdate[`users/${user.$key}/displayName`] = user.displayName;
       this.ad.object('')
         .update(dataToUpdate)
         .then(() => {

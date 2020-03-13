@@ -3,9 +3,7 @@ import {User} from '../user';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {AngularFireAuth} from '@angular/fire/auth';
 import EqualTextValidator from '../equal.validator';
-import {RoleService} from '../../roles/role.service';
 import {Observable, Subscription} from 'rxjs';
-import {Role} from '../../roles/role';
 
 @Component({
   selector: 'cp-user-create',
@@ -25,18 +23,11 @@ export class UserCreateComponent implements OnInit, OnDestroy {
   @Output()
   createUserEvent = new EventEmitter<User>();
 
-  roles: Role[];
   sub: Subscription;
-  constructor(private rs: RoleService) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.sub = this.rs.getRoles().subscribe(roles => {
-      this.roles = roles;
-      if (this.roles.length > 0) {
-        this.user.role = this.roles[0];
-      }
-    });
   }
 
   creatingNewUser(value) {
@@ -52,7 +43,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
                  repeatPass: string) {
     return pass === repeatPass;
   }
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.sub.unsubscribe();
   }
 }
